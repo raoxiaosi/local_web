@@ -5,11 +5,11 @@
 ### 项目环境
 
 ##### 前端
-> springboot 2.0.4.RELEASE + freemarker
+> springboot + freemarker
 >
 ##### 后端
 
-> springboot + eureka + feign + hystrix + getway + mybatis + mysql
+> springboot + mybatis + mysql
 >
 
 ### 注意事项
