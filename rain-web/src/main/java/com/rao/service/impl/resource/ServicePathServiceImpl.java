@@ -136,4 +136,11 @@ public class ServicePathServiceImpl implements ServicePathService {
         }
     }
 
+    @Override
+    public ResourceLocationsConfig findLocationConfig(Long serviceId) {
+        ServicePath servicePath = servicePathDao.find(serviceId);
+        ResourceLocationsConfig config = resourceLocationsConfigDao.find(servicePath.getConfigId());
+        return config;
+    }
+
 }

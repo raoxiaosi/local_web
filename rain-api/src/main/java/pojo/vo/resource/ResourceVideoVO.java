@@ -11,6 +11,7 @@ import java.io.Serializable;
 
 /**
  * 资源列表视图模型
+ *
  * @author raojing
  * @date 2019/8/8 21:23
  */
@@ -20,26 +21,45 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class ResourceVideoVO implements Serializable {
 
-    /** id */
-    @JsonSerialize(using= ToStringSerializer.class)
+    /**
+     * id
+     */
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
-    /** 视频名字 */
+    /**
+     * 视频名字
+     */
     private String videoName;
 
-    /** 视频描述信息 */
+    /**
+     * 视频地址
+     */
+    private String videoPath;
+
+    /**
+     * 视频描述信息
+     */
     private String videoDescribe;
 
-    /* 展示图片 */
+    /**
+     * 展示图片
+     */
     private String videoImage;
 
-    /* 展示图片URL */
+    /**
+     * 展示图片URL
+     */
     private String videoImageUrl;
 
-    /** 视频大小 */
+    /**
+     * 视频大小
+     */
     private String videoSize;
 
-    /** 创建时间 */
+    /**
+     * 创建时间
+     */
     private String createTime;
 
 }

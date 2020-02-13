@@ -10,54 +10,70 @@
     <link rel="stylesheet" href="${base}/css/bootstrap.min.css">
     <link rel="stylesheet" href="${base}/css/font-awesome.min.css">
     <link rel="stylesheet" href="${base}/css/layer/sub_css/modules/layer/default/layer.css">
+
+    <!-- js -->
+    <#include "/resource/admin/common/script.html">
+    <!-- css -->
+    <#include "/resource/admin/common/style.html">
+
 </head>
 <body>
+<!-- head -->
+<#include "/resource/admin/common/head.html">
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-8 col-xs-offset-2">
-            <h2><i class="fa fa-spinner fa-pulse"></i> 配置管理</h2>
+    <!-- 左侧菜单栏 -->
+    <#include "/resource/admin/common/menu_tree.html">
+    <div class="site-content">
+        <div class="col-sm-12">
+            <div>
+                <span class="self-breadcrumb">
+                    <a href="${base}/admin/resource_locations_config/config_list.html">配置管理</a>
+                    <span><cite> > </cite></span>
+                    <a><cite>编辑</cite></a>
+                </span>
+                <hr>
+            </div>
         </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
-            <form action="${base}/admin/resource_locations_config/config_save.html" method="post" class="form-horizontal">
-                <input type="hidden" name="id" value="${(config.id?string('0'))!''}"/>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">配置名称:</label>
-                    <div class="col-sm-9">
-                        <input type="text" name="configName" value="${(config.configName)!''}" class="form-control" placeholder="配置名称">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <form action="${base}/admin/resource_locations_config/config_save.html" method="post" class="form-horizontal">
+                    <input type="hidden" name="id" value="${(config.id?string('0'))!''}"/>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">配置名称:</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="configName" value="${(config.configName)!''}" class="form-control" placeholder="配置名称">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">本地地址(windows):</label>
-                    <div class="col-sm-9">
-                        <input type="text" name="wdLocationPath" value="${(config.wdLocationPath)!''}" class="form-control" placeholder="本地地址(windows)">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">本地地址(windows):</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="wdLocationPath" value="${(config.wdLocationPath)!''}" class="form-control" placeholder="本地地址(windows)">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">本地地址(linux或Mac):</label>
-                    <div class="col-sm-9">
-                        <input type="text" name="lmLocationPath" value="${(config.lmLocationPath)!''}" class="form-control" placeholder="本地地址(linux或Mac)">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">本地地址(linux或Mac):</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="lmLocationPath" value="${(config.lmLocationPath)!''}" class="form-control" placeholder="本地地址(linux或Mac)">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">状态:</label>
-                    <div class="col-sm-9">
-                        启用 <input type="radio" name="status" value="1" <#if config.status == 1>checked</#if> <#if !config??>checked</#if> />
-                        &emsp;&emsp;
-                        禁用 <input type="radio" name="status" value="2" <#if config.status == 2>checked</#if> />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="button" class="btn btn-info" onclick="window.history.back();"><i class="fa fa-mail-reply"></i> 返回列表</button>
-                        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> 保存配置</button>
-                    </div>
-                </div>
-            </form>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">状态:</label>
+                        <div class="col-sm-9">
+                            启用 <input type="radio" name="status" value="1" <#if config.status == 1>checked</#if> <#if !config??>checked</#if> />
+                    &emsp;&emsp;
+                    禁用 <input type="radio" name="status" value="2" <#if config.status == 2>checked</#if> />
+            </div>
         </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="button" class="btn btn-info" onclick="window.history.back();"><i class="fa fa-mail-reply"></i> 返回列表</button>
+                <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> 保存配置</button>
+            </div>
+        </div>
+        </form>
     </div>
+</div>
+</div>
 </div>
 </body>
 <script type="text/javascript">

@@ -1,6 +1,7 @@
 package com.rao.controller.local;
 
 import com.rao.config.LocalOssConfig;
+import constant.common.DateFormatEnum;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import service.resource.ServicePathService;
 import util.common.Paramap;
 import util.result.ResultMessage;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,14 +75,19 @@ public class AdminResourceController {
         paramap.put("serviceId", serviceId);
         List<ResourceVideo> resourceList = resourceVideoService.findByPage(paramap, pageNumber, pageSize);
 
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DateFormatEnum.FORMAT_SYMBOL_EXTEND.getFormatString());
         List<ResourceVideoVO> resourceVideoVOS = resourceList.stream().map(item -> {
             ResourceVideoVO resourceVideoVO = new ResourceVideoVO();
             BeanUtils.copyProperties(item, resourceVideoVO);
             resourceVideoVO.setVideoImageUrl(localOssConfig.getFullPath(item.getVideoImage()));
+            resourceVideoVO.setCreateTime(dateFormat.format(item.getCreateTime()));
             return resourceVideoVO;
         }).collect(Collectors.toList());
 
+        ResourceLocationsConfig config = servicePathService.findLocationConfig(serviceId);
+
         model.addAttribute("resourceList", resourceVideoVOS);
+        model.addAttribute("config", config);
         return "/resource/admin/resource_list";
     }
 

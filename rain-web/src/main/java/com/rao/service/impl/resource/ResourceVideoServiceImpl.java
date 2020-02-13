@@ -51,7 +51,9 @@ public class ResourceVideoServiceImpl implements ResourceVideoService {
 	public List<ResourceVideo> findByPage(Map<String, Object> params, Integer pageNumber, Integer pageSize) {
 		params.put("pageBegin",(pageNumber-1)*pageSize);
 		params.put("pageSize",pageSize);
-		return resourceVideoDao.findByPage(params);
+		List<ResourceVideo> videoList = resourceVideoDao.findByPage(params);
+		videoList.sort((x1, x2) -> x2.getCreateTime().compareTo(x1.getCreateTime()));
+		return videoList;
 	}
 
 	@Override

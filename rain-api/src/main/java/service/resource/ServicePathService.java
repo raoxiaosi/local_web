@@ -1,6 +1,7 @@
 package service.resource;
 
 
+import pojo.entity.resource.ResourceLocationsConfig;
 import pojo.entity.resource.ServicePath;
 
 import java.util.List;
@@ -48,5 +49,12 @@ public interface ServicePathService {
      * @param id
      */
     void initResourceData(Long id);
+
+    /**
+     * 通过服务id查询本地配置信息
+     * @param serviceId
+     * @return
+     */
+    ResourceLocationsConfig findLocationConfig(Long serviceId);
 
 }
