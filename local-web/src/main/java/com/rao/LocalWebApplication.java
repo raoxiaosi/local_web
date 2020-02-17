@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @MapperScan(value = "com.rao.dao")
 @SpringBootApplication
-public class RainWebApplication {
+public class LocalWebApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RainWebApplication.class, args);
+		SpringApplication.run(LocalWebApplication.class, args);
 	}
 }

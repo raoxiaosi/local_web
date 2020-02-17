@@ -34,6 +34,9 @@
             text-decoration: none;
             border-bottom: none !important;
         }
+        .update-info{
+            color: #79e184;
+        }
     </style>
 </head>
 <body>
@@ -85,9 +88,10 @@
         <div style="width: 100%;">
             <br>
             <span class="artTitle">${video.videoName}</span>
+            <br>
         </div>
         <p class="artInfo">
-            <span class="sInfo-1">${video.createTime?string('yyyy-MM-dd HH:mm:ss')}</span>
+            <span class="sInfo-1">${video.createTime?string('yyyy-MM-dd')}</span>
             <span class="sInfo-2"> 槲寄生 </span>
             <span class="sInfo-4" id="Jfont">A<em>+</em></span>
             <span>
@@ -97,17 +101,18 @@
                         <a href="javascript:void(0)" class="collect collect-add" onclick="collection_operation('${video.id?string(0)}')">添加收藏</a>
                 </#if>
             </span>
+            <a href="" class="collect update-info">编辑</a>
+        </p>
+        <!-- 视频区域 -->
+        <div class="profile" id="video"></div>
+        <p style="text-align: center; margin-bottom:10px;">
+            <script language="JavaScript" src="${base}/otherhtml/danjin.js"></script>
         </p>
         <div class="tag"><em>类型：</em>
             <a href="javascript:void(0);">张曼玉</a>
             <a href="javascript:void(0);">关之琳</a>
             <a href="javascript:void(0);">女神</a>
         </div>
-        <!-- 视频区域 -->
-        <div class="profile" id="video"></div>
-        <p style="text-align: center; margin-bottom:10px;">
-            <script language="JavaScript" src="${base}/otherhtml/danjin.js"></script>
-        </p>
         <div class="artBody">
             <p style="text-align: center">
 <!--                <img alt="" src="http://img4.imgtn.bdimg.com/it/u=1348631487,3145363397&fm=26&gp=0.jpg"/>-->

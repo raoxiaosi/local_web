@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.rao</groupId>
-    <artifactId>rain-parent</artifactId>
+    <artifactId>local-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -27,7 +27,7 @@
         <jsoup.version>1.11.3</jsoup.version>
         <hutool.version>4.2.1</hutool.version>
         <shiro.version>1.4.0</shiro.version>
-        <rain.api.version>1.0-SNAPSHOT</rain.api.version>
+        <local.api.version>1.0-SNAPSHOT</local.api.version>
     </properties>
 
     <dependencyManagement>
@@ -53,8 +53,8 @@
 
             <dependency>
                 <groupId>com.rao</groupId>
-                <artifactId>rain-api</artifactId>
-                <version>${rain.api.version}</version>
+                <artifactId>local-api</artifactId>
+                <version>${local.api.version}</version>
             </dependency>
 
             <dependency>
