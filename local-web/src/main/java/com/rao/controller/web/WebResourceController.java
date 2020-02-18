@@ -1,4 +1,4 @@
-package com.rao.controller.admin;
+package com.rao.controller.web;
 
 import com.rao.config.LocalOssConfig;
 import com.rao.util.file.DownLoadUtil;

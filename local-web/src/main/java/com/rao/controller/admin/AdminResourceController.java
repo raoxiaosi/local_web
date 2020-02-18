@@ -1,4 +1,4 @@
-package com.rao.controller.local;
+package com.rao.controller.admin;
 
 import com.rao.config.LocalOssConfig;
 import constant.common.DateFormatEnum;
