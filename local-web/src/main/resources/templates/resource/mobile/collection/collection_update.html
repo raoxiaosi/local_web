@@ -1,0 +1,171 @@
+<!doctype HTML>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>${video.videoName}(${video.videoPath})</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <link href="${base}/css/lady.css" rel="stylesheet" type="text/css"/>
+    <link href="${base}/css/common.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="${base}/css/layer/sub_css/layui.css">
+    <link rel="stylesheet" href="${base}/css/layer/sub_css/modules/layer/default/layer.css">
+    <script type="text/javascript" src="${base}/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="${base}/js/layer/layui.js"></script>
+    <script type="text/javascript" src="${base}/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="${base}/js/ckplayer.js"></script>
+    <style type="text/css">
+        .upload-preview{
+            float: left;
+        }
+        .upload-btn{
+            float: right;
+            height: 100px;
+        }
+        .upload-btn button{
+            height: 40px;
+            margin: 30px 5px;
+        }
+        .layui-upload{
+            margin: 10px 0px 20px 0px;
+            height: 100px;
+        }
+        .commit-btn{
+            width: 90%;
+            margin: 0px 5%;
+        }
+    </style>
+</head>
+<body>
+<div id="ivy_div" style="display: none;"></div>
+<div class="body bodyA"><span class="spanclass"> </span>
+    <div class="header-top">
+        <div class="header-top-left"><a href="${base}/web/resource/index.html" class="header-top-left-logo" title="雨成帘资源网"><img src="${base}/images/logo.png"/></a></div>
+        <div class="header-top-mid JheaderTopMid"></div>
+    </div>
+    <div class="header-nav JheaderNav" style="display:none">
+        <div class="header-nav-a">
+            <a href="${base}/web/resource/index.html">首页</a>
+            <a href="${base}/web/resource/resourceIndex.html">资源</a>
+            <a href="../../beauty/default.htm">美容</a>
+            <a href="../../reduce/default.htm">美体</a>
+            <a href="../../qinzi/default.htm">亲子</a>
+        </div>
+        <div class="header-nav-a">
+            <a href="../../health/default.htm">健康</a>
+            <a href="../../astro/default.htm">星座</a>
+            <a href="../../ent/default.htm">娱乐</a>
+            <a href="../../home/default.htm">家居</a>
+            <a href="${base}/web/collection/list.html" class="icon-new current">收藏</a>
+        </div>
+    </div>
+    <script type="text/javascript">
+        (function () {
+            var JheaderNav = document.querySelector(".JheaderNav"),
+                JheaderTopMid = document.querySelector(".JheaderTopMid");
+            JheaderTopMid.addEventListener("click", function () {
+                JheaderNav.style.display = JheaderNav.style.display == "none" ? "block" : "none"
+            }, false);
+        })()
+    </script>
+    <div class="header-bg"><a href="${base}/web/resource/index.html" class="header-home" title="雨成帘资源网"></a>
+        <div class="header-title">
+            <span class="header-title-nav">
+                <a href="${base}/web/collection/list.html"> 收藏 </a>
+                <i>></i>
+                 ${video.videoName}
+            </span>
+        </div>
+    </div>
+    <div class="artWrap">
+        <form id="listForm" class="layui-form" action="list.jhtml" method="post">
+            <div class="layui-upload">
+                <div class="upload-preview">
+                    <img src="${video.videoImage}" alt="" width="200px;" height="100px">
+                    <input type="hidden" name="videoImage" class="videoImage" value="${video.videoPath}">
+                </div>
+                <div class="upload-btn">
+                    <button type="button" class="layui-btn myfiles"><i class="layui-icon">&#xe67c;</i>上传图片</button>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <input type="text" name="videoName" value="${video.videoName}" class="layui-input" placeholder="资源名称">
+            </div>
+            <div class="layui-form-item">
+                <textarea name="videoDescribe" rows="8" class="layui-textarea"
+                          placeholder="资源描述信息">${video.videoDescribe}</textarea>
+            </div>
+            <div class="layui-form-item">
+                <button type="button" class="layui-btn commit-btn" onclick="updateResource('${video.id?string(0)}')">立即提交</button>
+            </div>
+        </form>
+    </div>
+    <div class="footer">
+        <p class="pTit-3"><em class="icon-group-small"></em>雨成帘资源网</p>
+        <p></p>
+    </div>
+</div>
+<!--前端所用js-->
+<script type="text/javascript">
+
+    var videoDescribe = $("[name='videoDescribe']").text();
+    videoDescribe = videoDescribe.replace(/<br\/>/g,'\r\n');
+    $("[name='videoDescribe']").text(videoDescribe);
+    $("[name='videoDescribe']").val(videoDescribe);
+
+    layui.use('upload', function(){
+        var upload = layui.upload;
+        var uploadInst = upload.render({
+            elem: '.myfiles' //绑定元素
+            ,field:"file"
+            ,url: '${base}/resource/manager/file_upload.html' //上传接口
+            ,done: function(res, index, upload){
+                console.log(res);
+                //上传完毕回调
+                var item = this.item;
+                $(".upload-preview").children(".videoImage").val(res.data.uploadInfo.filePath);
+                $(".upload-preview").children("img").attr("src", res.data.uploadInfo.fileUrl);
+                layer.msg(res.message,{icon:1})
+            }
+            ,error: function(){}
+        });
+    });
+
+    /**
+     * 修改资源信息
+     * @param node
+     * @param id
+     */
+    function updateResource(id){
+        var videoName = $("[name='videoName']").val();
+        var videoImage = $(".videoImage").val();
+        var videoDescribe = $("[name='videoDescribe']").val();
+
+        console.log(videoDescribe);
+
+        videoDescribe = videoDescribe.replace(/\r\n/g, '<br/>').replace(/\n/g, '<br/>').replace(/\s/g, ' ');
+
+        console.log(videoDescribe);
+
+        $.ajax({
+            url: "${base}/admin/resource/update_resource.html",
+            type: "post",
+            dataType: "json",
+            data: {
+                "id": id,
+                "videoName": videoName,
+                "videoImage": videoImage,
+                "videoDescribe": videoDescribe
+            },
+            success: function(result){
+                console.log(result);
+                layer.msg(result.message,{icon:1})
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

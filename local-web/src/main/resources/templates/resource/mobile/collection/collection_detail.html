@@ -101,7 +101,7 @@
                         <a href="javascript:void(0)" class="collect collect-add" onclick="collection_operation('${video.id?string(0)}')">添加收藏</a>
                 </#if>
             </span>
-            <a href="" class="collect update-info">编辑</a>
+            <a href="${base}/web/resource/source_update_page.html?resourceId=${(video.id)?string(0)}" class="collect update-info">编辑</a>
         </p>
         <!-- 视频区域 -->
         <div class="profile" id="video"></div>

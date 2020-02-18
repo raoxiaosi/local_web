@@ -103,9 +103,9 @@
                 console.log(res);
                 //上传完毕回调
                 var item = this.item;
-                $(item).nextAll(".videoImage").val(res.map.uploadInfo.filePath);
-                $(item).parent("td").prev("td").children("a").children("img").attr("src", res.map.uploadInfo.fileUrl);
-                layer.msg(result.message,{icon:1})
+                $(item).nextAll(".videoImage").val(res.data.uploadInfo.filePath);
+                $(item).parent("td").prev("td").children("a").children("img").attr("src", res.data.uploadInfo.fileUrl);
+                layer.msg(res.message,{icon:1})
             }
             ,error: function(){}
         });
@@ -148,9 +148,6 @@
                 layer.msg(result.message,{icon:1})
             }
         });
-
-
-
     }
 
 </script>

@@ -60,9 +60,10 @@ public class ResourceFileManagerController {
             LinkedMultiValueMap multiValueMap = new LinkedMultiValueMap();
             multiValueMap.add("file", fileSystemResource);
             String uploadInfoJsonStr = restTemplate.postForObject(restApi, multiValueMap, String.class);
-            JSONObject uploadInfoJsonObject = JSONUtil.parseObj(uploadInfoJsonStr).getJSONObject("map").getJSONObject("uploadInfo");
+            JSONObject uploadInfoJsonObject = JSONUtil.parseObj(uploadInfoJsonStr).getJSONObject("data").getJSONObject("uploadInfo");
             log.info("oss 返回的信息:{}", uploadInfoJsonObject);
             FileUploadVO fileUploadVO = JSONUtil.toBean(uploadInfoJsonObject, FileUploadVO.class);
+            fileUploadVO.setFileUrl(localOssConfig.getFullPath(fileUploadVO.getFilePath()));
             // 删除当前服务器的临时文件
             tempFile.delete();
             return ResultMessage.success().add("uploadInfo", fileUploadVO).addMessage("文件上传成功");

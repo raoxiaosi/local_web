@@ -1,7 +1,9 @@
 package com.rao.controller.admin;
 
+import com.rao.config.LocalOssConfig;
 import com.rao.util.file.DownLoadUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +41,8 @@ public class WebResourceController {
     private SourceCollectionsService sourceCollectionsService;
     @Resource
     private ResourceLocationsConfigService resourceLocationsConfigService;
+    @Autowired
+    private LocalOssConfig localOssConfig;
 
     /**
      * 根据终端类型返回对应视图
@@ -133,6 +137,23 @@ public class WebResourceController {
             return "/resource/mobile/collection/collection_detail";
         }
         return "/resource/web/resourceDetail";
+    }
+
+
+    /**
+     * 修改资源页面
+     * @param resourceId
+     * @param model
+     * @return
+     */
+    @GetMapping("/source_update_page")
+    public String sourceUpdatePage(@RequestParam Long resourceId,
+                                   Model model) {
+        ResourceVideo video = resourceVideoService.resourceDetail(resourceId);
+        video.setVideoPath(video.getVideoImage());
+        video.setVideoImage(localOssConfig.getFullPath(video.getVideoImage()));
+        model.addAttribute("video", video);
+        return "/resource/mobile/collection/collection_update";
     }
 
 
