@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须指向Dao接口 -->
+<mapper namespace="com.rao.dao.resource.ResourceTypeRelationDao">
+
+    <resultMap id="RainCampusResultMap" type="pojo.entity.resource.ResourceTypeRelation">
+        <result property="resourceId" column="resource_id"/>
+        <result property="typeId" column="type_id"/>
+    </resultMap>
+
+    <!-- 定义可重用的SQL代码段，可以包含在其他语句中 -->
+    <sql id="base_column">
+		 resource_id ,type_id
+	</sql>
+
+    <sql id="base_value_column">
+		 #{resourceId},#{typeId}
+	</sql>
+
+</mapper>
